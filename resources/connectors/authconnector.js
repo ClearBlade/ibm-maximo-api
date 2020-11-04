@@ -24,7 +24,7 @@ function AuthConnector(maximoRestUrl,maximopath)
 	AUTH_PATH = X_PUB_PATH;
 
 	this.maximoRestUrl = maximoRestUrl;
-	this.client = require(this.maximoRestUrl.protocol.split(':')[0]);
+	this.client = require(this.maximoRestUrl.protocol.split(':')[0] === 'https' ? 'https' : 'http');
 	this.xpublicuri = this.maximoRestUrl.protocol+"//"+this.maximoRestUrl.hostname+":"+this.maximoRestUrl.port+X_PUB_PATH;
  	this.maximopath = maximopath;
  	this.cookie = null;
