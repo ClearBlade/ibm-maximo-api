@@ -20,7 +20,7 @@ function ExternalConnector(options,resourceset)
 		this.options = options;
 		this.resourceset = resourceset;
 		this.protocol = (options.protocol == null)? "http": options.protocol;
-		this.client = require(this.protocol);
+		this.client = require(this.protocol === 'https' ? 'https' : 'http');
 		this.host = options.host;
 		this.port = options.port;
 		this.endpoint = options.endpoint;

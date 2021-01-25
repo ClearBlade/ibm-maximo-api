@@ -80,7 +80,7 @@ function createAttachment(buffer,current,datacallback)
 	var method = 'POST';
 	var deferred = Q.defer();
 	var returndata = '';
-	var client = require(current.resourceURI.split(':')[0]);
+	var client = require(current.resourceURI.split(':')[0] === 'https' ? 'https' : 'http');
 	var host = current.resourceURI.split(':')[1].split("//")[1];
 	var port = current.resourceURI.split(':')[2].split("/")[0];
 	var path = current.resourceURI.split(host)[1].split(port)[1];

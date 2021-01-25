@@ -32,12 +32,12 @@ function RelatedConnector(maximoRestUrl,maximopath)
 		{
 			var urlarray = this.maximoRestUrl.split(':');
 			var port = urlarray[2].split("/")[0];
-			this.client = require(urlarray[0]);
+			this.client = require(urlarray[0] === 'https' ? 'https' : 'http');
 			this.xpublicuri = urlarray[0]+":"+urlarray[1]+":"+port+X_PUB_PATH;
 			console.log("***** this.xpublicuri "+this.xpublicuri)
 		} else
 		{
-			this.client = require(this.maximoRestUrl.protocol.split(':')[0]);
+			this.client = require(this.maximoRestUrl.protocol.split(':')[0] === 'https' ? 'https' : 'http');
 			this.xpublicuri = this.maximoRestUrl.protocol+"//"+this.maximoRestUrl.hostname+":"+this.maximoRestUrl.port+X_PUB_PATH;
 		}
 	}
@@ -127,7 +127,7 @@ RelatedConnector.prototype.__fetchnext = function(np,myconnector,datacallback)
 	{
 		var nextpath = np_uri.substr( np_uri.indexOf(this.maximoRestUrl.port)+this.maximoRestUrl.port.length);
 		var returndata = '';
-		var client = require(this.maximoRestUrl.protocol.split(':')[0]);
+		var client = require(this.maximoRestUrl.protocol.split(':')[0] === 'https' ? 'https' : 'http');
 		var statusCode = "";
 		var resourceset = "";
 		var xpublicuri = this.maximoRestUrl.protocol+"//"+this.maximoRestUrl.hostname+":"+this.maximoRestUrl.port+X_PUB_PATH;

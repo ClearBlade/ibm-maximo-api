@@ -25,6 +25,7 @@ var SchemaConnector = require('./connectors/schemaconnector');
 
 function ResourceSet(resourcemboset,cookie,maxfactory,mbo)
 {
+	console.log('ResourceSet:: ', typeof resourcemboset, typeof cookie, typeof maxfactory, typeof mbo);
 	this.cookie = cookie;
 	// Since JavaScript does not support method/constructor overloading we have
  	// to handle multiple constructors by sniffing them out manually.
@@ -275,7 +276,7 @@ ResourceSet.prototype.invoke = function(resource,datacallback)
 
 	var deferred = Q.defer();
 	var returndata = '';
-	var client = require(this.maximoRestUrl.protocol.split(':')[0]);
+	var client = require(this.maximoRestUrl.protocol.split(':')[0] === 'https' ? 'https' : 'http');
 	var statusCode = "";
 	var resourceset = "";
 	var xpublicuri = this.maximoRestUrl.protocol+"//"+this.maximoRestUrl.hostname+":"+this.maximoRestUrl.port+X_PUB_PATH;

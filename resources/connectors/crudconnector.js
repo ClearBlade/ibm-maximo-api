@@ -32,12 +32,12 @@ function CRUDConnector(maximoRestUrl,maximopath)
 		{
 			var urlarray = this.maximoRestUrl.split(':');
 			var port = urlarray[2].split("/")[0];
-			this.client = require(urlarray[0]);
+			this.client = require(urlarray[0] === 'https' ? 'https' : 'http');
 			this.xpublicuri = urlarray[0]+":"+urlarray[1]+":"+port+X_PUB_PATH;
 			console.log("***** this.xpublicuri "+this.xpublicuri)
 		} else
 		{
-			this.client = require(this.maximoRestUrl.protocol.split(':')[0]);
+			this.client = require(this.maximoRestUrl.protocol.split(':')[0] === 'https' ? 'https' : 'http');
 			this.xpublicuri = this.maximoRestUrl.protocol+"//"+this.maximoRestUrl.hostname+":"+this.maximoRestUrl.port+X_PUB_PATH;
 		}
 	}
@@ -58,7 +58,7 @@ CRUDConnector.prototype.__create = function(jsonbody,props,attachments,datacallb
 
 	var deferred = Q.defer();
 	var returndata = '';
-	var client = require(this.maximoRestUrl.protocol.split(':')[0]);
+	var client = require(this.maximoRestUrl.protocol.split(':')[0] === 'https' ? 'https' : 'http');
 	var statusCode = "";
 	var resourceset = "";
 
@@ -134,7 +134,7 @@ CRUDConnector.prototype.__crud = function(jsonbody,props,current,method,xmethod,
 {
 	var deferred = Q.defer();
 	var returndata = '';
-	var client = require(current.resourceURI.split(':')[0]);
+	var client = require(current.resourceURI.split(':')[0] === 'https' ? 'https' : 'http');
 	var host = current.resourceURI.split(':')[1].split("//")[1];
 	var port = current.resourceURI.split(':')[2].split("/")[0];
 	var path = current.resourceURI.split(host)[1].split(port)[1];
